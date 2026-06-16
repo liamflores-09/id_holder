@@ -6,12 +6,7 @@ $alignmentClasses = match ($align) {
     'top' => 'origin-top',
     default => 'ltr:origin-top-right rtl:origin-top-left end-0',
 };
-
-$width = match ($width) {
-    '48' => 'w-48',
-    default => $width,
-};
-@endendphp
+@endphp
 
 <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div @click="open = ! open">
@@ -25,7 +20,7 @@ $width = match ($width) {
             x-transition:leave="transition ease-in duration-[200ms]"
             x-transition:leave-start="opacity-100 scale-100"
             x-transition:leave-end="opacity-0 scale-95"
-            class="absolute z-50 mt-2 {{ $width }} shadow-[0_4px_24px_rgba(0,0,0,0.06)] {{ $alignmentClasses }}"
+            class="absolute z-50 mt-2 w-48 shadow-[0_4px_24px_rgba(0,0,0,0.06)] {{ $alignmentClasses }}"
             style="display: none;"
             @click="open = false">
         <div class="{{ $contentClasses }}">

@@ -5,14 +5,14 @@
 ])
 
 @php
-$maxWidth = [
+$maxWidthClass = match ($maxWidth) {
     'sm' => 'sm:max-w-sm',
     'md' => 'sm:max-w-md',
     'lg' => 'sm:max-w-lg',
     'xl' => 'sm:max-w-xl',
     '2xl' => 'sm:max-w-2xl',
-][$maxWidth];
-@endendphp
+};
+@endphp
 
 <div
     x-data="{
@@ -63,7 +63,7 @@ $maxWidth = [
 
     <div
         x-show="show"
-        class="mb-6 bg-gallery overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.10)] transform transition-all sm:w-full {{ $maxWidth }} sm:mx-auto"
+        class="mb-6 bg-gallery overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.10)] transform transition-all sm:w-full {{ $maxWidthClass }} sm:mx-auto"
         x-transition:enter="ease-out duration-[500ms]"
         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
