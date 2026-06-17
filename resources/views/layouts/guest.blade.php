@@ -12,19 +12,19 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans bg-gallery text-charcoal antialiased">
-        <div class="min-h-screen flex flex-col">
-            <div class="grid-lines">
-                <div class="grid-line left-[25%]"></div>
-                <div class="grid-line left-[50%]"></div>
-                <div class="grid-line left-[75%]"></div>
-            </div>
+    <body>
+        <div class="grid-lines">
+            <div class="grid-line" style="left: 25%"></div>
+            <div class="grid-line" style="left: 50%"></div>
+            <div class="grid-line" style="left: 75%"></div>
+        </div>
 
-            <div class="flex-1 flex items-center justify-center py-16 md:py-24">
-                <div class="w-full max-w-md px-8">
-                    <div class="mb-12">
-                        <a href="/" class="block">
-                            <span class="font-serif text-2xl italic text-charcoal">ID Holder</span>
+        <div class="d-flex flex-column min-vh-100">
+            <div class="flex-grow-1 d-flex align-items-center py-5">
+                <div class="container" style="max-width: 420px;">
+                    <div class="mb-5">
+                        <a href="/" class="text-decoration-none">
+                            <span class="font-serif" style="font-size: 1.5rem; font-style: italic; color: var(--charcoal);">ID Holder</span>
                         </a>
                     </div>
 
@@ -32,9 +32,9 @@
                 </div>
             </div>
 
-            <footer class="border-t border-charcoal/10 py-8">
-                <div class="container-editorial text-center">
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-muted">&copy; {{ date('Y') }} ID Holder</span>
+            <footer style="border-top: 1px solid var(--border);" class="py-4">
+                <div class="container-xl text-center">
+                    <span class="editorial-text">&copy; {{ date('Y') }} ID Holder</span>
                 </div>
             </footer>
         </div>

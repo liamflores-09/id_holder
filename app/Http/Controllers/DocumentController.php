@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -92,7 +93,7 @@ class DocumentController extends Controller
 
     public function show(Document $document)
     {
-        $this->authorize('view', $document);
+        Gate::authorize('view', $document);
 
         $document->load('category', 'media');
 
@@ -101,7 +102,7 @@ class DocumentController extends Controller
 
     public function edit(Document $document)
     {
-        $this->authorize('update', $document);
+        Gate::authorize('update', $document);
 
         $categories = Category::where('user_id', Auth::id())->orderBy('sort_order')->get();
         $document->load('media');
@@ -111,7 +112,7 @@ class DocumentController extends Controller
 
     public function update(Request $request, Document $document)
     {
-        $this->authorize('update', $document);
+        Gate::authorize('update', $document);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -157,7 +158,7 @@ class DocumentController extends Controller
 
     public function destroy(Document $document)
     {
-        $this->authorize('delete', $document);
+        Gate::authorize('delete', $document);
 
         $document->clearAllMediaCollections();
         $document->delete();
@@ -167,7 +168,7 @@ class DocumentController extends Controller
 
     public function toggleFavorite(Document $document)
     {
-        $this->authorize('update', $document);
+        Gate::authorize('update', $document);
 
         $document->update(['is_favorite' => !$document->is_favorite]);
 
@@ -176,7 +177,7 @@ class DocumentController extends Controller
 
     public function toggleArchive(Document $document)
     {
-        $this->authorize('update', $document);
+        Gate::authorize('update', $document);
 
         $document->update(['is_archived' => !$document->is_archived]);
 

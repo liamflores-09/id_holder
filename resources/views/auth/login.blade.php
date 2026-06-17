@@ -4,28 +4,28 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <div>
+        <div class="mb-3">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="d-block w-100" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" />
         </div>
 
-        <div class="mt-6">
+        <div class="mb-4">
             <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            <x-text-input id="password" class="d-block w-100" type="password" name="password" required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" />
         </div>
 
-        <div class="block mt-6">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="border-charcoal/20 text-charcoal focus:ring-charcoal/50" name="remember">
-                <span class="ms-2 text-xs text-muted">{{ __('Remember me') }}</span>
+        <div class="form-check mb-4">
+            <input class="form-check-input editorial-checkbox" type="checkbox" name="remember" id="remember_me">
+            <label class="form-check-label editorial-text" for="remember_me" style="text-transform: none; letter-spacing: normal;">
+                {{ __('Remember me') }}
             </label>
         </div>
 
-        <div class="flex items-center justify-between mt-8">
+        <div class="d-flex justify-content-between align-items-center">
             @if (Route::has('password.request'))
-                <a class="text-xs text-muted hover:text-charcoal transition-colors duration-[500ms] underline underline-offset-4 decoration-charcoal/30" href="{{ route('password.request') }}">
+                <a class="editorial-link text-decoration-underline" style="letter-spacing: normal;" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
             @endif

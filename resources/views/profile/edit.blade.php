@@ -1,27 +1,29 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-serif text-3xl italic text-charcoal">
-            {{ __('Profile') }}
-        </h2>
+        <h2 class="font-serif" style="font-size: 1.875rem; font-style: italic;">{{ __('Profile') }}</h2>
     </x-slot>
 
-    <div class="section-light">
-        <div class="container-editorial space-y-12">
-            <div class="card-editorial">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+    <div class="editorial-section">
+        <div class="container-xl px-4 px-md-5">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="editorial-card">
+                        <div style="max-width: 540px;">
+                            @include('profile.partials.update-profile-information-form')
+                        </div>
+                    </div>
 
-            <div class="card-editorial">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+                    <div class="editorial-card mt-3">
+                        <div style="max-width: 540px;">
+                            @include('profile.partials.update-password-form')
+                        </div>
+                    </div>
 
-            <div class="card-editorial">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                    <div class="editorial-card mt-3">
+                        <div style="max-width: 540px;">
+                            @include('profile.partials.delete-user-form')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

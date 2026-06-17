@@ -1,73 +1,66 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <a href="{{ route('documents.index') }}" class="text-xs text-muted hover:text-charcoal transition-colors duration-[500ms] uppercase tracking-[0.2em]">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="{{ route('documents.index') }}" class="editorial-link" style="letter-spacing: normal;">
                 &larr; {{ __('Back') }}
             </a>
-            <div class="flex items-center gap-4">
+            <div class="d-flex align-items-center gap-3">
                 <form method="POST" action="{{ route('documents.toggle-favorite', $document) }}">
                     @csrf
-                    <button type="submit" class="text-xs text-muted hover:text-charcoal transition-colors duration-[500ms] uppercase tracking-[0.2em]">
+                    <button type="submit" class="editorial-link border-0 bg-transparent p-0" style="letter-spacing: normal;">
                         {{ $document->is_favorite ? '&#9733; Unfavorite' : '&#9734; Favorite' }}
                     </button>
                 </form>
-                <a href="{{ route('documents.edit', $document) }}" class="btn-secondary">
-                    <span>{{ __('Edit') }}</span>
-                </a>
+                <a href="{{ route('documents.edit', $document) }}" class="btn-editorial-outline"><span>{{ __('Edit') }}</span></a>
             </div>
         </div>
     </x-slot>
 
-    <div class="section-light">
-        <div class="container-editorial">
-            <div class="grid lg:grid-cols-3 gap-12">
-                <div class="lg:col-span-2">
-                    <div class="card-editorial">
-                        <div class="flex items-start justify-between mb-8">
+    <div class="editorial-section">
+        <div class="container-xl px-4 px-md-5">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="editorial-card">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
                             <div>
-                                <span class="text-[10px] uppercase tracking-[0.3em] text-muted block mb-2">
-                                    {{ str_replace('_', ' ', $document->document_type) }}
-                                </span>
-                                <h1 class="font-serif text-4xl md:text-5xl italic text-charcoal">
-                                    {{ $document->title }}
-                                </h1>
+                                <span class="editorial-text d-block mb-2">{{ str_replace('_', ' ', $document->document_type) }}</span>
+                                <h1 class="font-serif" style="font-size: 2.5rem; font-style: italic;">{{ $document->title }}</h1>
                             </div>
                             @if($document->is_favorite)
-                                <span class="text-2xl text-charcoal">&#9733;</span>
+                                <span style="font-size: 1.5rem; color: var(--charcoal);">&#9733;</span>
                             @endif
                         </div>
 
                         @if($document->document_number)
-                            <div class="mb-6">
-                                <span class="label-editorial">Document Number</span>
-                                <p class="text-charcoal font-mono">{{ $document->document_number }}</p>
+                            <div class="mb-3">
+                                <span class="editorial-label">Document Number</span>
+                                <p style="font-family: monospace;">{{ $document->document_number }}</p>
                             </div>
                         @endif
 
                         @if($document->description)
-                            <div class="mb-6">
-                                <span class="label-editorial">Description</span>
-                                <p class="text-muted leading-relaxed">{{ $document->description }}</p>
+                            <div class="mb-3">
+                                <span class="editorial-label">Description</span>
+                                <p style="color: var(--muted); line-height: 1.6;">{{ $document->description }}</p>
                             </div>
                         @endif
 
-                        <div class="grid grid-cols-2 gap-6 mb-6">
+                        <div class="row g-3 mb-3">
                             @if($document->issue_date)
-                                <div>
-                                    <span class="label-editorial">Issue Date</span>
-                                    <p class="text-charcoal">{{ $document->issue_date->format('M d, Y') }}</p>
+                                <div class="col-6">
+                                    <span class="editorial-label">Issue Date</span>
+                                    <p>{{ $document->issue_date->format('M d, Y') }}</p>
                                 </div>
                             @endif
-
                             @if($document->expiration_date)
-                                <div>
-                                    <span class="label-editorial">Expiration Date</span>
-                                    <p class="text-charcoal {{ $document->expiration_date->isPast() ? 'text-red-600' : ($document->expiration_date->diffInDays(now()) <= 30 ? 'text-amber-600' : '') }}">
+                                <div class="col-6">
+                                    <span class="editorial-label">Expiration Date</span>
+                                    <p style="{{ $document->expiration_date->isPast() ? 'color: #dc3545;' : ($document->expiration_date->diffInDays(now()) <= 30 ? 'color: #d97706;' : '') }}">
                                         {{ $document->expiration_date->format('M d, Y') }}
                                         @if($document->expiration_date->isPast())
-                                            <span class="text-xs">(Expired)</span>
+                                            <span style="font-size: 0.75rem;">(Expired)</span>
                                         @elseif($document->expiration_date->diffInDays(now()) <= 30)
-                                            <span class="text-xs">(Expiring Soon)</span>
+                                            <span style="font-size: 0.75rem;">(Expiring Soon)</span>
                                         @endif
                                     </p>
                                 </div>
@@ -75,22 +68,24 @@
                         </div>
 
                         @if($document->category)
-                            <div class="pt-6 border-t border-charcoal/10">
-                                <span class="label-editorial">Category</span>
-                                <p class="text-charcoal">{{ $document->category->name }}</p>
+                            <div class="pt-3" style="border-top: 1px solid var(--border);">
+                                <span class="editorial-label">Category</span>
+                                <p>{{ $document->category->name }}</p>
                             </div>
                         @endif
                     </div>
 
                     @if($document->getMedia('document-images')->count() > 0)
-                        <div class="card-editorial mt-6">
-                            <h3 class="font-serif text-xl italic text-charcoal mb-8">Document Images</h3>
-                            <div class="grid md:grid-cols-2 gap-8">
+                        <div class="editorial-card mt-3">
+                            <h3 class="font-serif mb-4" style="font-size: 1.25rem; font-style: italic;">Document Images</h3>
+                            <div class="row g-4">
                                 @foreach($document->getMedia('document-images') as $media)
-                                    <div class="image-card">
-                                        <img src="{{ $media->getUrl() }}" alt="{{ $media->name }}" class="w-full grayscale hover:grayscale-0 transition-all duration-[1800ms]">
-                                        <div class="p-4">
-                                            <span class="text-[10px] uppercase tracking-[0.3em] text-muted">{{ $media->name }}</span>
+                                    <div class="col-md-6">
+                                        <div class="image-card">
+                                            <img src="{{ $media->getUrl() }}" alt="{{ $media->name }}" class="w-100 image-editorial">
+                                            <div class="p-3">
+                                                <span class="editorial-text">{{ $media->name }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -99,22 +94,22 @@
                     @endif
                 </div>
 
-                <div class="lg:col-span-1">
-                    <div class="card-editorial">
-                        <h3 class="font-serif text-xl italic text-charcoal mb-8">Actions</h3>
+                <div class="col-lg-4">
+                    <div class="editorial-card">
+                        <h3 class="font-serif mb-4" style="font-size: 1.25rem; font-style: italic;">Actions</h3>
 
-                        <div class="space-y-4">
+                        <div class="d-grid gap-2">
                             @if($document->getMedia('document-images')->count() > 0)
                                 @foreach($document->getMedia('document-images') as $media)
-                                    <a href="{{ $media->getUrl() }}" target="_blank" class="btn-secondary block text-center">
-                                        <span>View {{ $media->name }}</span>
+                                    <a href="{{ $media->getUrl() }}" target="_blank" class="btn-editorial-outline text-center text-decoration-none">
+                                        View {{ $media->name }}
                                     </a>
                                 @endforeach
                             @endif
 
                             @if($document->getMedia('document-files')->count() > 0)
                                 @foreach($document->getMedia('document-files') as $media)
-                                    <a href="{{ $media->getUrl() }}" download class="btn-primary block text-center">
+                                    <a href="{{ $media->getUrl() }}" download class="btn-editorial text-center text-decoration-none">
                                         <span>Download File</span>
                                     </a>
                                 @endforeach
@@ -122,28 +117,28 @@
 
                             <form method="POST" action="{{ route('documents.toggle-archive', $document) }}">
                                 @csrf
-                                <button type="submit" class="btn-secondary w-full text-center">
-                                    <span>{{ $document->is_archived ? 'Restore' : 'Archive' }}</span>
+                                <button type="submit" class="btn-editorial-outline w-100">
+                                    {{ $document->is_archived ? 'Restore' : 'Archive' }}
                                 </button>
                             </form>
 
                             <form method="POST" action="{{ route('documents.destroy', $document) }}" onsubmit="return confirm('Are you sure you want to delete this document?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="w-full py-3 text-xs font-medium uppercase tracking-[0.2em] text-red-600 hover:text-red-700 transition-colors duration-[500ms]">
+                                <button type="submit" class="btn-editorial-outline w-100" style="border-color: #dc3545; color: #dc3545;">
                                     Delete Document
                                 </button>
                             </form>
                         </div>
                     </div>
 
-                    <div class="card-editorial mt-6">
-                        <span class="text-[10px] uppercase tracking-[0.3em] text-muted block mb-2">Created</span>
-                        <p class="text-charcoal text-sm">{{ $document->created_at->format('M d, Y') }}</p>
+                    <div class="editorial-card mt-3">
+                        <span class="editorial-label d-block mb-1">Created</span>
+                        <p style="font-size: 0.875rem;">{{ $document->created_at->format('M d, Y') }}</p>
 
-                        <div class="mt-4">
-                            <span class="text-[10px] uppercase tracking-[0.3em] text-muted block mb-2">Last Updated</span>
-                            <p class="text-charcoal text-sm">{{ $document->updated_at->format('M d, Y') }}</p>
+                        <div class="mt-3">
+                            <span class="editorial-label d-block mb-1">Last Updated</span>
+                            <p style="font-size: 0.875rem;">{{ $document->updated_at->format('M d, Y') }}</p>
                         </div>
                     </div>
                 </div>

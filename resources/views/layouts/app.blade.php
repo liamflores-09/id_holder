@@ -12,27 +12,25 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans bg-gallery text-charcoal antialiased">
-        <div class="min-h-screen">
-            <div class="grid-lines">
-                <div class="grid-line left-[25%]"></div>
-                <div class="grid-line left-[50%]"></div>
-                <div class="grid-line left-[75%]"></div>
-            </div>
-
-            @include('layouts.navigation')
-
-            @isset($header)
-                <header class="border-b border-charcoal/10">
-                    <div class="container-editorial py-6">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <main>
-                {{ $slot }}
-            </main>
+    <body>
+        <div class="grid-lines">
+            <div class="grid-line" style="left: 25%"></div>
+            <div class="grid-line" style="left: 50%"></div>
+            <div class="grid-line" style="left: 75%"></div>
         </div>
+
+        @include('layouts.navigation')
+
+        @isset($header)
+            <div class="page-header">
+                <div class="container-xl py-4 px-4 px-md-5">
+                    {{ $header }}
+                </div>
+            </div>
+        @endisset
+
+        <main>
+            {{ $slot }}
+        </main>
     </body>
 </html>

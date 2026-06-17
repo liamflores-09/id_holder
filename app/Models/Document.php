@@ -7,11 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Document extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, LogsActivity;
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['title', 'document_type', 'is_favorite', 'is_archived'])
+            ->logOnlyDirty();
+    }
 
     protected $fillable = [
         'user_id',
@@ -34,9 +42,6 @@ class Document extends Model implements HasMedia
         'is_archived' => 'boolean',
         'metadata' => 'array',
     ];
-
-    protected static $logAttributes = ['title', 'document_type', 'is_favorite', 'is_archived'];
-    protected static $logOnlyDirty = true;
 
     public function user(): BelongsTo
     {
