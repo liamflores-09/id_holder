@@ -1,0 +1,536 @@
+# Design Style: Luxury / Editorial (Monochrome Edition)
+
+## Design Philosophy
+
+**Core Principles:** Elegance through restraint, contrast, precision, and negative space. This style emulates luxury fashion editorials, modern architecture books, gallery publications, and minimalist luxury brands. Success depends on **dramatic typography hierarchy**, **expansive whitespace**, **cinematic motion**, **architectural grids**, and **monochromatic depth through layering**.
+
+**Vibe:** Sophisticated, Timeless, Minimal, Expensive, Editorial, Architectural, Refined, Intentional.
+
+**The Secret:** Luxury isn't about decoration. Luxury is about precision. Remove everything unnecessary. Let typography, proportion, spacing, and contrast create the emotional impact. Every element should feel curated and deliberate.
+
+---
+
+## Design Token System (The DNA)
+
+### Colors (Pure Monochrome Editorial)
+
+**Primary Palette:**
+
+* **Background:** `#FAFAFA` (Gallery White) — A crisp, premium white with softness. Never use pure white.
+* **Foreground:** `#111111` (Deep Charcoal) — Rich black used for typography, borders, and primary UI.
+* **Muted Background:** `#F3F3F3` (Soft Surface) — Used for elevated sections and subtle contrast.
+* **Muted Foreground:** `#707070` (Editorial Grey) — Secondary text, captions, and metadata.
+* **Accent:** `#FFFFFF` (Pure White) — Reserved for dark surfaces and contrast moments.
+* **Accent Foreground:** `#111111` (Deep Charcoal) — Text on light accents.
+
+**Layering Strategy:**
+
+* Use opacity for borders and dividers: `#111111` at 8–15% opacity.
+* Dark sections use inverted palette: `#111111` background with `#FAFAFA` text and muted text at 65–75% opacity.
+* Never use pure black (`#000000`) for large areas.
+* Never use bright colors, gradients, or saturated accents.
+
+---
+
+### Typography (The Most Critical Element)
+
+**Font Pairing:**
+
+* **Heading Font:** "Playfair Display" — Elegant editorial serif for headlines and quotations.
+* **Body Font:** "Inter" — Modern sans-serif for body copy and interface elements.
+
+**Type Scale & Hierarchy:**
+
+* **Hero Headlines:** `text-6xl` to `text-9xl`
+* **Section Headlines:** `text-5xl` to `text-7xl`
+* **Subsection Titles:** `text-3xl` to `text-4xl`
+* **Body Text:** `text-base` to `text-lg`
+* **Labels:** `text-xs`
+* **Micro Text:** `text-[10px]`
+
+**Font Weight Distribution:**
+
+* Playfair: 300–400
+* Inter: 400–500
+
+**Letter Spacing (Critical for Luxury Feel):**
+
+* **Labels:** `tracking-[0.25em]` to `tracking-[0.3em]`
+* **Buttons:** `tracking-[0.2em]`
+* **Headlines:** `tracking-tight`
+* **Body Text:** Default tracking
+
+**Line Height Strategy:**
+
+* **Headlines:** `leading-[0.9]`
+* **Body:** `leading-relaxed`
+* **Small Text:** Default or relaxed
+
+---
+
+### Radius & Borders (Architectural Precision)
+
+**Border Radius:**
+
+* **Everything:** `0px`
+* Absolutely no rounded corners.
+
+**Border Treatment:**
+
+* **Width:** `1px`
+* **Color:** `rgba(17,17,17,0.12)`
+* **Strong Borders:** `rgba(17,17,17,0.2)`
+* **Style:** Prefer single-edge borders (`border-t`, `border-b`) over boxed containers.
+* **Dividers:** Thin architectural lines.
+
+---
+
+### Shadows & Effects (Subtle Layered Depth)
+
+**Shadows:**
+
+* **Hero Image:** `shadow-[0_10px_40px_rgba(0,0,0,0.10)]`
+* **Feature Images:** `shadow-[0_4px_24px_rgba(0,0,0,0.06)]`
+* **Cards:** `shadow-[0_2px_8px_rgba(0,0,0,0.02)]`
+* **Hover State:** `shadow-[0_12px_30px_rgba(0,0,0,0.08)]`
+* **Inner Borders:** `shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]`
+
+**Texture & Grain:**
+
+* Subtle paper grain overlay at 2% opacity.
+* Mimics premium magazine paper stock.
+
+**Image Treatment:**
+
+* **Default:** Full grayscale.
+* **Hover:** Slight contrast increase.
+* **Transition:** `duration-[1800ms]`
+* **Scale:** `group-hover:scale-105`
+* Images never reveal color.
+
+---
+
+### Grid & Vertical Lines (Structural Framework)
+
+**Visible Grid System:**
+
+* Four fixed vertical grid lines.
+* `bg-[#111111]/10`
+* Visible across the entire viewport.
+* Creates editorial structure and rhythm.
+
+**Layout Grid:**
+
+* 12-column system.
+* Maximum width: `1600px`
+* Padding:
+
+  * Mobile: `px-8`
+  * Desktop: `px-16`
+
+**Asymmetry:**
+
+* Use offset columns.
+* Avoid perfectly symmetrical layouts.
+
+---
+
+## Component Styling Principles
+
+### Buttons (Minimalist Editorial)
+
+**Visual Structure:**
+
+* Rectangular.
+* Sharp edges.
+* Uppercase typography.
+* Wide tracking.
+
+**Primary Button:**
+
+* **Default:** `bg-[#111111] text-[#FAFAFA]`
+* **Hover:** White overlay slides from left.
+* **Animation:**
+
+  * Initial: `translate-x-[-100%]`
+  * Hover: `translate-x-0`
+  * Duration: `500ms`
+* Text remains above overlay using z-index.
+
+**Secondary Button:**
+
+* Transparent.
+* Thin border.
+* Fills black on hover.
+
+**Link Button:**
+
+* Text-only.
+* Underline appears on hover.
+* No icons unless necessary.
+
+---
+
+### Cards & Containers (Defined by Lines)
+
+**Visual Approach:**
+
+* Transparent background.
+* Single top border.
+* Generous spacing.
+
+**Border:**
+
+```css
+border-t border-[#111111]/10
+```
+
+**Hover:**
+
+```css
+hover:bg-black/[0.015]
+```
+
+Barely visible.
+
+**Image Cards:**
+
+* Grayscale imagery.
+* Slow zoom.
+* Shadow evolution.
+* Portrait-oriented aspect ratios.
+
+---
+
+### Inputs (Underline Only)
+
+**Visual Style:**
+
+* Bottom border only.
+* Transparent background.
+
+**Border Color:**
+
+```css
+#111111
+```
+
+**Placeholder:**
+
+* Playfair Display
+* Italic
+* Editorial grey
+
+**Focus State:**
+
+```css
+focus-visible:border-[#111111]
+```
+
+No glow.
+No colored outlines.
+
+---
+
+### Interactive States (Slow & Deliberate)
+
+**Hover Effects:**
+
+* Duration: `500ms–700ms`
+* Images: `1800ms`
+* Slight scale.
+* Contrast changes.
+* Shadow deepening.
+
+**Focus States:**
+
+* Minimal focus indicators.
+* Border emphasis instead of rings.
+
+**Disabled States:**
+
+* `opacity-50`
+* Muted interaction.
+
+---
+
+## Layout Principles (Breaking Symmetry)
+
+### Asymmetric Composition
+
+* Avoid 50/50 layouts.
+* Prefer 7/5 or offset grids.
+* Leave deliberate empty space.
+* Align content toward bottom-left where appropriate.
+
+---
+
+### Vertical Spacing (Generous Air)
+
+**Section Padding:**
+
+```css
+py-24 md:py-32
+```
+
+**Card Padding:**
+
+```css
+p-8 md:p-12
+```
+
+**Element Gaps:**
+
+```css
+gap-12 md:gap-16
+```
+
+Luxury requires breathing room.
+
+---
+
+### Section Alternation
+
+Alternate:
+
+```css
+bg-[#FAFAFA]
+```
+
+and
+
+```css
+bg-[#111111]
+```
+
+to create rhythm and contrast.
+
+---
+
+### Content Width
+
+```css
+max-w-[1600px]
+mx-auto
+```
+
+Reading columns:
+
+```css
+max-w-md
+max-w-xl
+```
+
+---
+
+## The "Bold Factor" (Non-Genericness)
+
+These elements define the monochrome editorial identity:
+
+### 1. Vertical Editorial Labels
+
+```css
+writing-mode: vertical-rl;
+```
+
+Example:
+
+```text
+EDITORIAL / VOL. 01
+```
+
+---
+
+### 2. Drop Caps
+
+Large Playfair Display initials.
+
+```css
+text-7xl
+leading-[0.8]
+float-left
+mr-3
+```
+
+---
+
+### 3. Mixed Italic Headlines
+
+Example:
+
+```text
+Curated Excellence
+
+The Details
+
+The Process
+```
+
+Use italics for emphasis instead of color.
+
+---
+
+### 4. Permanent Grayscale Photography
+
+All imagery remains monochrome.
+
+Hover introduces:
+
+* Scale
+* Contrast
+* Brightness
+* Shadow
+
+Never color.
+
+---
+
+### 5. Visible Grid Lines
+
+Architectural structure throughout the viewport.
+
+---
+
+### 6. White Sliding Button Animation
+
+Replaces the gold luxury interaction.
+
+---
+
+### 7. Decorative Horizontal Lines
+
+```css
+h-px w-8 md:w-12
+bg-[#111111]/15
+```
+
+---
+
+### 8. Extreme Type Scale
+
+Tiny labels paired with enormous headlines.
+
+---
+
+### 9. Layered Shadows
+
+Soft depth.
+
+Never dramatic.
+
+---
+
+### 10. Editorial Testimonials
+
+* Border shift
+* Increased padding
+* Shadow evolution
+* Grayscale portrait photography
+
+---
+
+## Anti-Patterns (What to Avoid)
+
+1. No rounded corners.
+2. No bright accent colors.
+3. No gradients.
+4. No neon effects.
+5. No glassmorphism.
+6. No glowing shadows.
+7. No centered-everything layouts.
+8. No small typography.
+9. No decorative icon overload.
+10. No fast animations.
+11. No colorful photography.
+12. No crowded spacing.
+13. No vibrant hover effects.
+14. No generic SaaS-style UI.
+
+---
+
+## Animation & Motion (Cinematic Timing)
+
+**Philosophy:** Motion should feel slow, calm, and intentional.
+
+**Timing:**
+
+* Buttons: `500ms`
+* Text: `700ms`
+* Shadows: `700ms`
+* Images: `1800ms`
+
+**Easing:**
+
+```css
+cubic-bezier(0.25, 0.46, 0.45, 0.94)
+```
+
+**Hover Effects:**
+
+* Contrast increase
+* Shadow evolution
+* Slow zoom
+* Typography emphasis
+
+Never abrupt.
+
+---
+
+## Accessibility Considerations
+
+**Contrast:**
+
+* `#111111` on `#FAFAFA` exceeds AAA standards.
+* Secondary text remains AA compliant.
+
+**Focus Indicators:**
+
+* Border-based focus states.
+* Keyboard-friendly.
+
+**Motion Preferences:**
+
+* Respect `prefers-reduced-motion`.
+
+**Typography:**
+
+* Large readable text.
+* Comfortable line height.
+* Strong hierarchy.
+
+---
+
+## Implementation Notes
+
+**Tech Stack:**
+
+* Tailwind CSS v4
+* Playfair Display
+* Inter
+* Lucide React (minimal usage)
+
+**Performance:**
+
+* GPU-accelerated transforms.
+* Lightweight shadows.
+* Static monochrome imagery.
+
+**Code Organization:**
+
+* Centralized design tokens.
+* Shared button variants.
+* Shared card primitives.
+* Consistent spacing scale.
+* Reusable editorial layout components.
+
+**Inspiration References:**
+
+* Saint Laurent
+* The Row
+* Jil Sander
+* COS
+* Kinfolk
+* Architectural Digest
+* Modernist editorial publications
+
+The final result should feel like a luxury print magazine translated into a digital experience—crisp monochrome photography, architectural layouts, dramatic typography, and deliberate motion.
